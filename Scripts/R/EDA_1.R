@@ -46,39 +46,48 @@ StatsByVesselType <- data.frame(describeBy(df, df$vessel_type))
 colnames(df[, sapply(df, class) == 'character'])[-1]
 
 # Приведение переменных 'chr' к категориальному виду 
-# vessel_type
-df$vessel_type <- factor(df$vessel_type)
-#cargo_type
-df$cargo_type <- factor(df$cargo_type)
-# cargo_demand
-df$cargo_demand <- factor(df$cargo_demand, levels = c("маленький", "большой"),
-                          labels = c(0, 1))
-# cargo_value
-df$cargo_value <- factor(df$cargo_value, levels = c("обычный", "ценный", "очень ценный"),
-                          labels = c(0, 1, 2))
-# cargo_fragility
-df$cargo_fragility <- factor(df$cargo_fragility,
-                             levels = c("не хрупкий", "хрупкий"),
-                             labels = c(0, 1))
-# cargo_danger
-df$cargo_danger <- factor(df$cargo_danger)
-
-# wind_strength
-df$wind_strength <- factor(df$wind_strength,
-                             levels = c("штиль", "тихий ветер", "легкий ветер",
-                                        "слабый ветер", "умеренный ветер", "свежий ветер",
-                                        "сильный ветер", "крепкий ветер",
-                                        "очень крепкий ветер", "шторм"),
-                             labels = 0:9)
-# sea_state
-df$sea_state <- factor(df$sea_state, 
-                       levels = c("полный штиль", "штиль", "очень слабое",
-                                  "слабое", "умеренное", "значительное",
-                                  "очень бурное", "сильное"),
-                       labels = 0:7)
-
-# wind_direction
-df$wind_direction <- factor(df$wind_direction)
+convert_to_factor <- function(df) {
+  # Названия колонок
+  col_names <- c("vessel_type", "cargo_type", "cargo_demand",
+                 "cargo_value", "cargo_fragility", "cargo_danger",
+                 "wind_strength", "sea_state", "wind_direction")
+  
+  # vessel_type
+  df[, col_names[1]] <- factor(df[, col_names[1]])
+  #cargo_type
+  df[, col_names[2]] <- factor(df[, col_names[2]])
+  # cargo_demand
+  df[, col_names[3]] <- factor(df[, col_names[3]], levels = c("маленький", "большой"),
+                               labels = c(0, 1))
+  # cargo_value
+  df[, col_names[4]] <- factor(df[, col_names[4]], levels = c("обычный", "ценный", "очень ценный"),
+                               labels = c(0, 1, 2))
+  # cargo_fragility
+  df[, col_names[5]] <- factor(df[, col_names[5]],
+                               levels = c("не хрупкий", "хрупкий"),
+                               labels = c(0, 1))
+  # cargo_danger
+  df[, col_names[6]]<- factor(df[, col_names[6]])
+  
+  # wind_strength
+  df[, col_names[7]] <- factor(df[, col_names[7]],
+                               levels = c("штиль", "тихий ветер", "легкий ветер",
+                                          "слабый ветер", "умеренный ветер", "свежий ветер",
+                                          "сильный ветер", "крепкий ветер",
+                                          "очень крепкий ветер", "шторм"),
+                               labels = 0:9)
+  # sea_state
+  df[, col_names[8]] <- factor(df[, col_names[8]], 
+                               levels = c("полный штиль", "штиль", "очень слабое",
+                                          "слабое", "умеренное", "значительное",
+                                          "очень бурное", "сильное"),
+                               labels = 0:7)
+  
+  # wind_direction
+  df[, col_names[9]] <- factor(df[, col_names[9]])
+  
+  return (df)
+}
 
 # Проверка типов переменных
 str(df)
