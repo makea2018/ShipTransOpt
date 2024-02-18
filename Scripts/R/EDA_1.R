@@ -92,6 +92,8 @@ convert_to_factor <- function(df) {
 # Проверка типов переменных
 str(df)
 
+df_classess_after_class_transform <- data.frame(sapply(df, class))
+
 #=====================================================#
 # Визуализация распределений переменных (гистограммы) #
 #=====================================================#
@@ -102,8 +104,8 @@ draw_all_hists <- function(df){
   par(mfrow= c(3,3))
   
   # Построение графиков
-  for (i in 1:(length(df) - 1)) {
-    res <- shapiro.test(df[,i])$p.value
+  for (i in 1:length(colnames(df))) {
+    res <- shapiro.test(df[,i]+0.5)$p.value
     hist(df[, i], col=alpha("blue", 0.5), ylab="Частота", xlab=vars_names[i],
          main="", freq = F)
     title(paste("p =", res), font.main=1,
