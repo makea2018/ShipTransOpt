@@ -73,14 +73,14 @@ find_IQR_stat <- function (x) {
 
 # Построение вспом. данных по условию
 no_outliers_IQR_stat <- df[!rowSums(sapply(df, find_IQR_stat)) > 1, ]
-cat("Кол-во выбросов через IQR-диапозон =", dim(df[rowSums(sapply(df, find_IQR_stat)) > 1, ])[1])
+cat("Кол-во выбросов через IQR-диапазон =", dim(df[rowSums(sapply(df, find_IQR_stat)) > 1, ])[1])
 
-# Визуализация кол-ва выбросов в каждой переменной через IQR-диапозон
+# Визуализация кол-ва выбросов в каждой переменной через IQR-диапазон
 IQR_stat_ForVisual_df <- as.data.frame(sapply(as.data.frame(sapply(df, find_IQR_stat)), sum)); colnames(IQR_stat_ForVisual_df) <- "count"
 IQR_stat_ForVisual_df <- subset(IQR_stat_ForVisual_df, count != 0)
 ggplot(IQR_stat_ForVisual_df, aes(x=row.names(IQR_stat_ForVisual_df), y=IQR_stat_ForVisual_df$count)) + 
   geom_bar(stat = "identity", fill="#4CCD8D") + 
-  labs(y="Количество", x="Переменные", title = "Кол-во выбросов в переменных через IQR-диапозон") + 
+  labs(y="Количество", x="Переменные", title = "Кол-во выбросов в переменных через IQR-диапазон") + 
   theme(plot.title = element_text(hjust = 0.5, face="bold",
                                   size=16),
         axis.title.x = element_text(size=12),
