@@ -1,5 +1,7 @@
 # Импорт библиотек
-lapply(c("psych", "ggplot2", "gridExtra", "grid", "metan"), require, character.only = TRUE)
+lapply(c("psych", "ggplot2",
+         "gridExtra", "grid",
+         "metan", "caret"), require, character.only = TRUE)
 
 # =====================================================
 #            EDA - Предобработка данных               #
@@ -181,3 +183,13 @@ if (summary(lm(target ~ ., data=df_numeric_only[, -1]))$r.squared < summary(lm(t
 } else {
   print("Преобразование переменных к более нормальному виду снижает точность модели")
 }
+
+
+# =========================================
+#            Нормализация данных          #
+# =========================================
+# Нормализуем данные от 0 до 1
+df_normalized <- predict(preProcess(df_numeric_only[, -1], method = c("range")), df_numeric_only[, -1])
+
+# Визуализация числовых переменных
+draw_all_hists(df_normalized)
