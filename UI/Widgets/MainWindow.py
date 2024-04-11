@@ -2,7 +2,7 @@ from PySide6.QtWidgets import (QMainWindow, QSizePolicy, QHBoxLayout,
                                QToolBar, QLabel, QPushButton,
                                QSpacerItem, QWidget)
 from PySide6.QtGui import QFont, QIcon
-from PySide6.QtCore import QSize, Qt
+from PySide6.QtCore import QSize
 
 class UserPanel(QWidget):
     def __init__(self):
@@ -42,6 +42,26 @@ class UserPanel(QWidget):
 
         # Отображаем слой на виджете
         self.setLayout(horizontalLayout)
+
+
+        # =====================================================================#
+        #                               Коннекты                               #
+        # =====================================================================#
+
+
+        # =====================================================================#
+        #                               Размеры                                #
+        # =====================================================================#
+
+
+        # =====================================================================#
+        #                               Стили                                  #
+        # =====================================================================#
+        user_menu_button.setStyleSheet(
+            """
+                border: none;
+            """
+        )
 
 class MainWindow(QMainWindow):
     def __init__(self):
