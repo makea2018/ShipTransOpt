@@ -39,6 +39,7 @@ class UserPanel(QWidget):
         horizontalLayout.addWidget(user_name)
         horizontalLayout.addItem(horizontalSpacer_3)
         horizontalLayout.addWidget(user_menu_button)
+        horizontalLayout.addItem(horizontalSpacer_3)
 
         # Отображаем слой на виджете
         self.setLayout(horizontalLayout)
@@ -84,10 +85,10 @@ class MainWindow(QMainWindow):
         menu_bar = QToolBar()
         menu_bar.setMovable(False)
         self.addToolBar(menu_bar)
-        file_menu = menu_bar.addAction("Файл")
         save_action = menu_bar.addAction("Сохранить")
         load_action = menu_bar.addAction("Загрузить")
-        help_menu = menu_bar.addAction("Помощь")
+        help_action = menu_bar.addAction("Помощь")
+        quit_action = menu_bar.addAction("Закрыть")
 
         # Виджет с данными пользователя
         user_widget = UserPanel()
