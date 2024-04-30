@@ -1,5 +1,5 @@
 from PySide6.QtCore import QSize
-from PySide6.QtGui import QFont
+from PySide6.QtGui import QFont, QIntValidator
 from PySide6.QtWidgets import (QComboBox, QLineEdit,
                                QVBoxLayout, QWidget,
                                QSizePolicy)
@@ -114,6 +114,18 @@ class Left_Panel(QWidget):
         self.wind_strength.setFont(font)
         self.sea_state.setFont(font)
 
+
+        # Валидация значений указанных в предикторах
+        self.L.setValidator(QIntValidator(1, 600))
+        self.B.setValidator(QIntValidator(1, 70))
+        self.d.setValidator(QIntValidator(1, 30))
+        self.DW.setValidator(QIntValidator(1, 550000))
+        self.speed.setValidator(QIntValidator(1, 40))
+        self.cargo_amount.setValidator(QIntValidator(1, 550000))
+        self.cost_per_mile.setValidator(QIntValidator(1, 10000000))
+        self.sea_route.setValidator(QIntValidator(1, 20000))
+        self.wind_strength.setValidator(QIntValidator(0, 9))
+        self.sea_state.setValidator(QIntValidator(0, 7))
 
         # =====================================================================#
         #                               Коннекты                               #
