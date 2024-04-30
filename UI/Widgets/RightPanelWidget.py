@@ -21,14 +21,14 @@ class Right_Panel(QWidget):
         self.result_text_label.setAlignment(Qt.AlignCenter)
 
         # Вертикальный слой
-        verticalLayout = QVBoxLayout()
+        self.verticalLayout = QVBoxLayout()
         # Добавляем элементы параметров в вертикальный слой
-        verticalLayout.addWidget(self.predict_button)
-        verticalLayout.addItem(verticalSpacer)
-        verticalLayout.addWidget(self.result_text_label)
+        self.verticalLayout.addWidget(self.predict_button)
+        self.verticalLayout.addItem(verticalSpacer)
+        self.verticalLayout.addWidget(self.result_text_label)
 
         # Отображаем слой на виджете
-        self.setLayout(verticalLayout)
+        self.setLayout(self.verticalLayout)
 
         # Шрифт
         font1 = QFont("Arial", 16)
@@ -46,7 +46,7 @@ class Right_Panel(QWidget):
         #                               Размеры                                #
         # =====================================================================#
         # Размер виджета
-        self.setMaximumSize(QSize(1250, 222))
+        self.setMaximumSize(QSize(1250, 500))
         self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         # Размер кнопки
         self.predict_button.setMaximumSize(QSize(200, 70))
