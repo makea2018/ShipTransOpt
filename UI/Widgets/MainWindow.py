@@ -58,9 +58,15 @@ class UserPanel(QWidget):
         #                               Стили                                  #
         # =====================================================================#
         user_menu_button.setStyleSheet(
-            """
-                border: none;
-            """
+                """
+                    QPushButton {
+                        border: none;
+                    }
+
+                    QPushButton:pressed {
+                        border: 2px dashed white;
+                    }
+                """
         )
 
 class MainWindow(QMainWindow):
