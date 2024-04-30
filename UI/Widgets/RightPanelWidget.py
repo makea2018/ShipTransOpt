@@ -16,16 +16,16 @@ class Right_Panel(QWidget):
         # Spacer
         verticalSpacer = QSpacerItem(20, 46, QSizePolicy.Minimum, QSizePolicy.Maximum)
         # Строка с выводом результата предсказания нейросети
-        result_text_label = QLabel()
-        result_text_label.setText("Оптимальная стоимость транспортировки груза - ")
-        result_text_label.setAlignment(Qt.AlignCenter)
+        self.result_text_label = QLabel()
+        self.result_text_label.setText("Оптимальная стоимость транспортировки груза - ")
+        self.result_text_label.setAlignment(Qt.AlignCenter)
 
         # Вертикальный слой
         verticalLayout = QVBoxLayout()
         # Добавляем элементы параметров в вертикальный слой
         verticalLayout.addWidget(predict_button)
         verticalLayout.addItem(verticalSpacer)
-        verticalLayout.addWidget(result_text_label)
+        verticalLayout.addWidget(self.result_text_label)
 
         # Отображаем слой на виджете
         self.setLayout(verticalLayout)
@@ -35,12 +35,12 @@ class Right_Panel(QWidget):
         font2 = QFont("Arial", 24)
         # Применяем шрифт к объектам
         predict_button.setFont(font1)
-        result_text_label.setFont(font2)
+        self.result_text_label.setFont(font2)
 
         # =====================================================================#
         #                               Коннекты                               #
         # =====================================================================#
-
+        predict_button.clicked.connect(self.predict_cost)
 
         # =====================================================================#
         #                               Размеры                                #
@@ -52,8 +52,8 @@ class Right_Panel(QWidget):
         predict_button.setMaximumSize(QSize(200, 70))
         predict_button.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         # Размер сообщения результата
-        result_text_label.setMaximumSize(QSize(1250, 106))
-        result_text_label.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        self.result_text_label.setMaximumSize(QSize(1250, 106))
+        self.result_text_label.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
 
         # =====================================================================#
         #                               Стили                                  #
@@ -84,3 +84,10 @@ class Right_Panel(QWidget):
     # =====================================================================#
     #                               Функции                                #
     # =====================================================================#
+    def predict_cost(self):
+        init_text = self.result_text_label.text()
+        if init_text.endswith("- "):
+            # Вычисление стоимости транспортировки груза
+            cost = 1000
+            # Запись стоимости в QLabel
+            self.result_text_label.setText(init_text + str(cost))
