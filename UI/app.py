@@ -7,7 +7,7 @@ from Widgets.MainBodyWidget import MainBody
 app = QApplication(sys.argv)
 
 # Главное окно приложения
-window = MainWindow()
+window = MainWindow(app)
 # Виджет основного тела приложения
 mainBody = MainBody()
 # Помещаем виджеты на экран
