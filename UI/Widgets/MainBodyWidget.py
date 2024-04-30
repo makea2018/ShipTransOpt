@@ -13,13 +13,15 @@ class NotValidLabel(QWidget):
         # =====================================================================#
         NotValidLabel = QLabel(text)
         # Шрифт
-        font = QFont("Arial", 16)
+        font = QFont("Arial", 20)
         
         NotValidLabel.setFont(font)
 
         # Горизонтальный слой
         h_layout = QHBoxLayout()
         h_layout.addWidget(NotValidLabel)
+        # Отступы контента внутри виджета
+        h_layout.setContentsMargins(0, 0, 0, 0)
 
         self.setLayout(h_layout)
 
