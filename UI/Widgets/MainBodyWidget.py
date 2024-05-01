@@ -97,6 +97,7 @@ class MainBody(QWidget):
             cost = 1000
             # Запись стоимости в QLabel
             self.rightPanelWidget.result_text_label.setText(init_text + str(cost))
+        print(self.predictors_values)
 
     def write_predictors_values(self):
         # Записываем все значения предикторов в словарь предикторов
@@ -120,8 +121,13 @@ class MainBody(QWidget):
 
     def validate_na_in_predictors_values(self):
         predictors_values = self.write_predictors_values()
+        # Условие что в виджете меньше 3 сообщений (Кнопка + Сообщение со стоимостью + Предупреждение валидации)
+        cond = self.rightPanelWidget.verticalLayout.count() < 4
         # Проверяем, что все значения для предикторов заполнены
-        if any(x == "" for x in list(predictors_values.values())) and self.rightPanelWidget.verticalLayout.count() < 4:
+        if any(x == "" for x in list(predictors_values.values())) and cond:
             # Добавляем виджет о том, что данные не валидированы
             Warning_Label = NotValidLabel("Не все значения предикторов были заполнены!")
             self.rightPanelWidget.verticalLayout.addWidget(Warning_Label)
+        elif all(x != "" for x in list(predictors_values.values())) and not cond:
+            widget = self.rightPanelWidget.verticalLayout.takeAt(3)
+            self.rightPanelWidget.verticalLayout.removeWidget(widget.widget().deleteLater())
