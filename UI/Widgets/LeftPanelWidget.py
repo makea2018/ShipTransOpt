@@ -21,25 +21,25 @@ class Left_Panel(QWidget):
         self.vessel_type.addItem("танкер")
         # Длина судна
         self.L = QLineEdit()
-        self.L.setPlaceholderText("Длина судна, м")
+        self.L.setPlaceholderText("Длина судна, м (не более 600)")
         # Ширина судна
         self.B = QLineEdit()
-        self.B.setPlaceholderText("Ширина судна, м")
+        self.B.setPlaceholderText("Ширина судна, м (не более 70)")
         # Осадка судна
         self.d = QLineEdit()
-        self.d.setPlaceholderText("Осадка судна, м")
+        self.d.setPlaceholderText("Осадка судна, м (не более 30)")
         # Дедвейт
         self.DW = QLineEdit()
-        self.DW.setPlaceholderText("Дедвейт, т")
+        self.DW.setPlaceholderText("Дедвейт, т (не более 550000)")
         # Скорость судна
         self.speed = QLineEdit()
-        self.speed.setPlaceholderText("Скорость судна, узел")
+        self.speed.setPlaceholderText("Скорость судна, узел (не более 40)")
         # Количество перевозимого груза
         self.cargo_amount = QLineEdit()
-        self.cargo_amount.setPlaceholderText("Количество перевозимого груза, т")
+        self.cargo_amount.setPlaceholderText("Количество перевозимого груза, т (не более 550000)")
         # Цена 1т груза за 1 милю
         self.cost_per_mile = QLineEdit()
-        self.cost_per_mile.setPlaceholderText("Цена 1т груза за 1 милю")
+        self.cost_per_mile.setPlaceholderText("Цена 1т груза за 1 милю (не более 50000)")
         # Спрос на товар
         self.cargo_demand = QComboBox()
         self.cargo_demand.setPlaceholderText("Спрос на товар")
@@ -63,13 +63,13 @@ class Left_Panel(QWidget):
         self.cargo_danger.addItem("опасный")
         # Протяженность морского пути
         self.sea_route = QLineEdit()
-        self.sea_route.setPlaceholderText("Протяженность морского пути, миль")
+        self.sea_route.setPlaceholderText("Протяженность морского пути, миль (не более 20000)")
         # Сила ветра
         self.wind_strength = QLineEdit()
-        self.wind_strength.setPlaceholderText("Сила ветра, балл")
+        self.wind_strength.setPlaceholderText("Сила ветра, балл (не более 9)")
         # Сила волнения
         self.sea_state = QLineEdit()
-        self.sea_state.setPlaceholderText("Сила волнения, балл")
+        self.sea_state.setPlaceholderText("Сила волнения, балл (не более 7)")
 
         # Слои
         verticalLayout = QVBoxLayout()
@@ -122,7 +122,7 @@ class Left_Panel(QWidget):
         self.DW.setValidator(QIntValidator(1, 550000))
         self.speed.setValidator(QIntValidator(1, 40))
         self.cargo_amount.setValidator(QIntValidator(1, 550000))
-        self.cost_per_mile.setValidator(QIntValidator(1, 10000000))
+        self.cost_per_mile.setValidator(QIntValidator(1, 50000))
         self.sea_route.setValidator(QIntValidator(1, 20000))
         self.wind_strength.setValidator(QIntValidator(0, 9))
         self.sea_state.setValidator(QIntValidator(0, 7))
@@ -137,23 +137,23 @@ class Left_Panel(QWidget):
         # =====================================================================#
         # Размеры виджета
         self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        self.setMaximumWidth(400)
-        self.vessel_title.setMaximumSize(QSize(400, 40))
-        self.vessel_type.setMaximumSize(QSize(400, 40))
-        self.L.setMaximumSize(QSize(400, 40))
-        self.B.setMaximumSize(QSize(400, 40))
-        self.d.setMaximumSize(QSize(400, 40))
-        self.DW.setMaximumSize(QSize(400, 40))
-        self.speed.setMaximumSize(QSize(400, 40))
-        self.cargo_amount.setMaximumSize(QSize(400, 40))
-        self.cost_per_mile.setMaximumSize(QSize(400, 40))
-        self.cargo_demand.setMaximumSize(QSize(400, 40))
-        self.cargo_value.setMaximumSize(QSize(400, 40))
-        self.cargo_fragility.setMaximumSize(QSize(400, 40))
-        self.cargo_danger.setMaximumSize(QSize(400, 40))
-        self.sea_route.setMaximumSize(QSize(400, 40))
-        self.wind_strength.setMaximumSize(QSize(400, 40))
-        self.sea_state.setMaximumSize(QSize(400, 40))
+        self.setMaximumWidth(560)
+        self.vessel_title.setMaximumSize(QSize(560, 45))
+        self.vessel_type.setMaximumSize(QSize(560, 45))
+        self.L.setMaximumSize(QSize(560, 45))
+        self.B.setMaximumSize(QSize(560, 45))
+        self.d.setMaximumSize(QSize(560, 45))
+        self.DW.setMaximumSize(QSize(560, 45))
+        self.speed.setMaximumSize(QSize(560, 45))
+        self.cargo_amount.setMaximumSize(QSize(560, 45))
+        self.cost_per_mile.setMaximumSize(QSize(560, 45))
+        self.cargo_demand.setMaximumSize(QSize(560, 45))
+        self.cargo_value.setMaximumSize(QSize(560, 45))
+        self.cargo_fragility.setMaximumSize(QSize(560, 45))
+        self.cargo_danger.setMaximumSize(QSize(560, 45))
+        self.sea_route.setMaximumSize(QSize(560, 45))
+        self.wind_strength.setMaximumSize(QSize(560, 45))
+        self.sea_state.setMaximumSize(QSize(560, 45))
 
 
         # =====================================================================#
