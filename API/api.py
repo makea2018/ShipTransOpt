@@ -3,12 +3,19 @@ import pickle
 import numpy as np
 
 # Загрузка модели
-with open("./KNN_models/KNN_model_3.pkl", "rb") as f:
-    knnModel = pickle.load(f)
+try:
+    with open("./KNN_models/KNN_model_3.pkl", "rb") as f:
+        knnModel = pickle.load(f)
+    # Ответ от модели
+    model_answer = True
+except:
+    # Ответ от модели
+    model_answer = False
 
 # Создание объекта API приложения
 app = FastAPI(
-    title="ShipTransOpt API"
+    title="ShipTransOpt API",
+    version="1_0"
 )
 
 # Загрузка тестовых данных
@@ -31,9 +38,11 @@ vars = list(values.values())[1:]
 # Методы API
 @app.get("/", description="Метод выдает информацию о том, успешно ли загрузилась модель нейросети")
 def get_model_info():
-    if knnModel is not None:
+    if model_answer:
         return "Модель knn успешно загружена и готова к работе"
-
+    else:
+        return "Ошибка при загрузке модели knn"
+    
 @app.post("/predict", description="Модель предсказывает стоимость транспортировки груза")
 def predict(vars: list = vars):
     # Предсказание
