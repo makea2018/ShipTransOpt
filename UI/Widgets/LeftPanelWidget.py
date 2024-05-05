@@ -131,16 +131,6 @@ class Left_Panel(QWidget):
         # =====================================================================#
         #                               Коннекты                               #
         # =====================================================================#
-        self.L.textChanged.connect(self.validate_L)
-        self.B.textChanged.connect(self.validate_B)
-        self.d.textChanged.connect(self.validate_d)
-        self.DW.textChanged.connect(self.validate_DW)
-        self.speed.textChanged.connect(self.validate_speed)
-        self.cargo_amount.textChanged.connect(self.validate_cargo_amount)
-        self.cost_per_mile.textChanged.connect(self.validate_cost_per_mile)
-        self.sea_route.textChanged.connect(self.validate_sea_route)
-        self.wind_strength.textChanged.connect(self.validate_wind_strength)
-        self.sea_state.textChanged.connect(self.validate_sea_state)
        
 
         # =====================================================================#
@@ -204,58 +194,3 @@ class Left_Panel(QWidget):
     # =====================================================================#
     #                               Функции                                #
     # =====================================================================#
-    def validate_vessel_title(self):
-        if self.vessel_title.hasAcceptableInput():
-            self.vessel_title.setStyleSheet("border: 2px solid white;")
-        else:
-            self.vessel_title.setStyleSheet("border: 2px solid red;")
-    def validate_L(self):
-        if self.L.hasAcceptableInput():
-            self.L.setStyleSheet("border: 2px solid white;")
-        else:
-            self.L.setStyleSheet("border: 2px solid red;")
-    def validate_B(self):
-        if self.B.hasAcceptableInput():
-            self.B.setStyleSheet("border: 2px solid white;")
-        else:
-            self.B.setStyleSheet("border: 2px solid red;")
-    def validate_d(self):
-        if self.d.hasAcceptableInput():
-            self.d.setStyleSheet("border: 2px solid white;")
-        else:
-            self.d.setStyleSheet("border: 2px solid red;")
-    def validate_DW(self):
-        if self.DW.hasAcceptableInput():
-            self.DW.setStyleSheet("border: 2px solid white;")
-        else:
-            self.DW.setStyleSheet("border: 2px solid red;")
-    def validate_speed(self):
-        if self.speed.hasAcceptableInput():
-            self.speed.setStyleSheet("border: 2px solid white;")
-        else:
-            self.speed.setStyleSheet("border: 2px solid red;")
-    def validate_cargo_amount(self):
-        if self.cargo_amount.hasAcceptableInput():
-            self.cargo_amount.setStyleSheet("border: 2px solid white;")
-        else:
-            self.cargo_amount.setStyleSheet("border: 2px solid red;")
-    def validate_cost_per_mile(self):
-        if self.cost_per_mile.hasAcceptableInput():
-            self.cost_per_mile.setStyleSheet("border: 2px solid white;")
-        else:
-            self.cost_per_mile.setStyleSheet("border: 2px solid red;")
-    def validate_sea_route(self):
-        if self.sea_route.hasAcceptableInput():
-            self.sea_route.setStyleSheet("border: 2px solid white;")
-        else:
-            self.sea_route.setStyleSheet("border: 2px solid red;")
-    def validate_wind_strength(self):
-        if self.wind_strength.hasAcceptableInput():
-            self.wind_strength.setStyleSheet("border: 2px solid white;")
-        else:
-            self.wind_strength.setStyleSheet("border: 2px solid red;")
-    def validate_sea_state(self):
-        if self.sea_state.hasAcceptableInput():
-            self.sea_state.setStyleSheet("border: 2px solid white;")
-        else:
-            self.sea_state.setStyleSheet("border: 2px solid red;")

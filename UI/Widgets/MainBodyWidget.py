@@ -73,6 +73,18 @@ class MainBody(QWidget):
         # =====================================================================#
         #                               Коннекты                               #
         # =====================================================================#
+        # Валидация ввода значений предикторов
+        self.leftPanelWidget.L.textChanged.connect(self.validate_L)
+        self.leftPanelWidget.B.textChanged.connect(self.validate_B)
+        self.leftPanelWidget.d.textChanged.connect(self.validate_d)
+        self.leftPanelWidget.DW.textChanged.connect(self.validate_DW)
+        self.leftPanelWidget.speed.textChanged.connect(self.validate_speed)
+        self.leftPanelWidget.cargo_amount.textChanged.connect(self.validate_cargo_amount)
+        self.leftPanelWidget.cost_per_mile.textChanged.connect(self.validate_cost_per_mile)
+        self.leftPanelWidget.sea_route.textChanged.connect(self.validate_sea_route)
+        self.leftPanelWidget.wind_strength.textChanged.connect(self.validate_wind_strength)
+        self.leftPanelWidget.sea_state.textChanged.connect(self.validate_sea_state)
+        # Предсказание стоимости транспортировки груза (Кнопка 'Определить')
         self.rightPanelWidget.predict_button.clicked.connect(self.predict_cost)
 
         # =====================================================================#
@@ -90,6 +102,67 @@ class MainBody(QWidget):
     # =====================================================================#
     #                               Функции                                #
     # =====================================================================#
+    
+    #=====================================================================#
+    #            Валидация ввода значений предикторов                     #
+    #=====================================================================#
+    def validate_L(self):
+        if self.leftPanelWidget.L.hasAcceptableInput():
+            self.leftPanelWidget.L.setStyleSheet("border: 2px solid white;")
+            # Отключение возможности нажать кнопку 'Определить'
+            
+        else:
+            self.leftPanelWidget.L.setStyleSheet("border: 2px solid red;")
+    def validate_B(self):
+        if self.leftPanelWidget.B.hasAcceptableInput():
+            self.leftPanelWidget.B.setStyleSheet("border: 2px solid white;")
+        else:
+            self.leftPanelWidget.B.setStyleSheet("border: 2px solid red;")
+    def validate_d(self):
+        if self.leftPanelWidget.d.hasAcceptableInput():
+            self.leftPanelWidget.d.setStyleSheet("border: 2px solid white;")
+        else:
+            self.leftPanelWidget.d.setStyleSheet("border: 2px solid red;")
+    def validate_DW(self):
+        if self.leftPanelWidget.DW.hasAcceptableInput():
+            self.leftPanelWidget.DW.setStyleSheet("border: 2px solid white;")
+        else:
+            self.leftPanelWidget.DW.setStyleSheet("border: 2px solid red;")
+    def validate_speed(self):
+        if self.leftPanelWidget.speed.hasAcceptableInput():
+            self.leftPanelWidget.speed.setStyleSheet("border: 2px solid white;")
+        else:
+            self.leftPanelWidget.speed.setStyleSheet("border: 2px solid red;")
+    def validate_cargo_amount(self):
+        if self.leftPanelWidget.cargo_amount.hasAcceptableInput():
+            self.leftPanelWidget.cargo_amount.setStyleSheet("border: 2px solid white;")
+        else:
+            self.leftPanelWidget.cargo_amount.setStyleSheet("border: 2px solid red;")
+    def validate_cost_per_mile(self):
+        if self.leftPanelWidget.cost_per_mile.hasAcceptableInput():
+            self.leftPanelWidget.cost_per_mile.setStyleSheet("border: 2px solid white;")
+        else:
+            self.leftPanelWidget.cost_per_mile.setStyleSheet("border: 2px solid red;")
+    def validate_sea_route(self):
+        if self.leftPanelWidget.sea_route.hasAcceptableInput():
+            self.leftPanelWidget.sea_route.setStyleSheet("border: 2px solid white;")
+        else:
+            self.leftPanelWidget.sea_route.setStyleSheet("border: 2px solid red;")
+    def validate_wind_strength(self):
+        if self.leftPanelWidget.wind_strength.hasAcceptableInput():
+            self.leftPanelWidget.wind_strength.setStyleSheet("border: 2px solid white;")
+        else:
+            self.leftPanelWidget.wind_strength.setStyleSheet("border: 2px solid red;")
+    def validate_sea_state(self):
+        if self.leftPanelWidget.sea_state.hasAcceptableInput():
+            self.leftPanelWidget.sea_state.setStyleSheet("border: 2px solid white;")
+        else:
+            self.leftPanelWidget.sea_state.setStyleSheet("border: 2px solid red;")
+    
+
+    #=====================================================================#
+    #            Взаимодействие с кнопкой 'Определить'                    #
+    #=====================================================================#
     def write_predictors_values(self):
         # Записываем все значения предикторов в словарь предикторов
         self.predictors_values["vessel_title"] = self.leftPanelWidget.vessel_title.text()
