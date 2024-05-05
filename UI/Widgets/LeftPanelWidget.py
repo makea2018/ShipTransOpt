@@ -1,5 +1,5 @@
 from PySide6.QtCore import QSize
-from PySide6.QtGui import QFont, QIntValidator
+from PySide6.QtGui import QFont, QIntValidator, QDoubleValidator, QRegularExpressionValidator
 from PySide6.QtWidgets import (QComboBox, QLineEdit,
                                QVBoxLayout, QWidget,
                                QSizePolicy)
@@ -116,14 +116,15 @@ class Left_Panel(QWidget):
 
 
         # Валидация значений указанных в предикторах
-        self.L.setValidator(QIntValidator(1, 600))
-        self.B.setValidator(QIntValidator(1, 70))
-        self.d.setValidator(QIntValidator(1, 30))
-        self.DW.setValidator(QIntValidator(1, 550000))
-        self.speed.setValidator(QIntValidator(1, 40))
+        self.vessel_title.setValidator(QRegularExpressionValidator(r"[A-Za-zА-Яа-я]+\s{1}\d{1,4}"))
+        self.L.setValidator(QDoubleValidator(1, 600, 2))
+        self.B.setValidator(QDoubleValidator(1, 70, 2))
+        self.d.setValidator(QDoubleValidator(1, 30, 2))
+        self.DW.setValidator(QDoubleValidator(1, 550000, 2))
+        self.speed.setValidator(QDoubleValidator(1, 40, 2))
         self.cargo_amount.setValidator(QIntValidator(1, 550000))
-        self.cost_per_mile.setValidator(QIntValidator(1, 50000))
-        self.sea_route.setValidator(QIntValidator(1, 20000))
+        self.cost_per_mile.setValidator(QDoubleValidator(1, 70, 2))
+        self.sea_route.setValidator(QIntValidator(1, 15000))
         self.wind_strength.setValidator(QIntValidator(0, 9))
         self.sea_state.setValidator(QIntValidator(0, 7))
 
@@ -203,6 +204,11 @@ class Left_Panel(QWidget):
     # =====================================================================#
     #                               Функции                                #
     # =====================================================================#
+    def validate_vessel_title(self):
+        if self.vessel_title.hasAcceptableInput():
+            self.vessel_title.setStyleSheet("border: 2px solid white;")
+        else:
+            self.vessel_title.setStyleSheet("border: 2px solid red;")
     def validate_L(self):
         if self.L.hasAcceptableInput():
             self.L.setStyleSheet("border: 2px solid white;")
