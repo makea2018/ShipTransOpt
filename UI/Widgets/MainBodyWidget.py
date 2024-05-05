@@ -5,6 +5,8 @@ from PySide6.QtWidgets import (QSpacerItem, QHBoxLayout,
 from Widgets.LeftPanelWidget import Left_Panel
 from Widgets.RightPanelWidget import Right_Panel
 import numpy as np
+import json
+import requests
 
 class NotValidLabel(QWidget):
     def __init__(self, text):
@@ -214,6 +216,11 @@ class MainBody(QWidget):
         return True
 
     def predict_cost(self):
+        # Удаляем предсказание о стоимости в строке виджета
+        init_text = self.rightPanelWidget.result_text_label.text()
+        if not init_text == "Оптимальная стоимость транспортировки груза - ":
+            self.rightPanelWidget.result_text_label.setText("Оптимальная стоимость транспортировки груза - ")
+        
         na_validation_result = self.validate_na_in_predictors_values()
         invalid_input_validation_result = self.validate_invalid_input()
         # Добавляем надпись если хотя бы одно значение невалидное (горит красным)
@@ -244,20 +251,28 @@ class MainBody(QWidget):
                 self.predictors_values["sea_state"] = int(self.predictors_values["sea_state"])
 
                 # Обработка результатов категориальных предикторов
-                self.predictors_values["vessel_type"]
-                self.predictors_values["cargo_demand"]
-                self.predictors_values["cargo_value"]
-                self.predictors_values["cargo_fragility"]
-                self.predictors_values["cargo_danger"]
+
+                self.predictors_values["vessel_type"] = int(np.where(self.predictors_values["vessel_type"] == 'сухогруз', 0, 1))
+                self.predictors_values["cargo_demand"] = int(np.where(self.predictors_values["cargo_demand"] == "маленький", 0, 1))
+                self.predictors_values["cargo_value"] = int(np.select([self.predictors_values["cargo_value"] == "обычный", self.predictors_values["cargo_value"] == "ценный", self.predictors_values["cargo_value"] == "очень ценный"], [0, 1, 2]))
+                self.predictors_values["cargo_fragility"] = int(np.where(self.predictors_values["cargo_fragility"] == "не хрупкий", 0, 1))
+                self.predictors_values["cargo_danger"] = int(np.where(self.predictors_values["cargo_danger"] == 'не опасный', 0, 1))
         
-                print(self.predictors_values)
+                # Отправка данных на API для предсказания
+                # JSON
+                data_in_json = json.dumps(self.predictors_values, indent=4)  
+                
+                # Попытка выполнить запрос в течение 2 сек
+                try:
+                    r = requests.post("http://127.0.0.1:8000/predict", data=data_in_json, timeout=2)
+                    # Стоимость транспортировки
+                    cost = r.json()['prediction']
+                    
+                    # Запись стоимости в строку виджета
+                    self.rightPanelWidget.result_text_label.setText(init_text + str(cost))
+                except requests.exceptions.Timeout:
+                    # Запись инфо об ошибке в строку виджета
+                    self.rightPanelWidget.result_text_label.setText(init_text + "сервер не отвечает")
             
             return 1
-
-        # init_text = self.rightPanelWidget.result_text_label.text()
-        # if init_text.endswith("- "):
-        #     # Вычисление стоимости транспортировки груза
-        #     cost = 1000
-        #     # Запись стоимости в QLabel
-        #     self.rightPanelWidget.result_text_label.setText(init_text + str(cost))
-        # print(self.predictors_values)
+        
