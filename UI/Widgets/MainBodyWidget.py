@@ -109,8 +109,6 @@ class MainBody(QWidget):
     def validate_L(self):
         if self.leftPanelWidget.L.hasAcceptableInput():
             self.leftPanelWidget.L.setStyleSheet("border: 2px solid white;")
-            # Отключение возможности нажать кнопку 'Определить'
-            
         else:
             self.leftPanelWidget.L.setStyleSheet("border: 2px solid red;")
     def validate_B(self):
@@ -159,7 +157,22 @@ class MainBody(QWidget):
         else:
             self.leftPanelWidget.sea_state.setStyleSheet("border: 2px solid red;")
     
-
+    # Функция отключения кнопки 'Определить'
+    def validate_invalid_input(self):
+        inputs = [self.leftPanelWidget.L.hasAcceptableInput(),
+                  self.leftPanelWidget.B.hasAcceptableInput(),
+                  self.leftPanelWidget.d.hasAcceptableInput(),
+                  self.leftPanelWidget.DW.hasAcceptableInput(),
+                  self.leftPanelWidget.speed.hasAcceptableInput(),
+                  self.leftPanelWidget.cargo_amount.hasAcceptableInput(),
+                  self.leftPanelWidget.cost_per_mile.hasAcceptableInput(),
+                  self.leftPanelWidget.sea_route.hasAcceptableInput(),
+                  self.leftPanelWidget.wind_strength.hasAcceptableInput(),
+                  self.leftPanelWidget.sea_state.hasAcceptableInput()
+                  ]
+        
+        return all(inputs)
+    
     #=====================================================================#
     #            Взаимодействие с кнопкой 'Определить'                    #
     #=====================================================================#
@@ -201,16 +214,24 @@ class MainBody(QWidget):
         return True
 
     def predict_cost(self):
-        validation_result = self.validate_na_in_predictors_values()
-        if validation_result:
+        na_validation_result = self.validate_na_in_predictors_values()
+        invalid_input_validation_result = self.validate_invalid_input()
+        if not invalid_input_validation_result:
+            print("Один или несколько предикторов имеют неверный ввод!")
+            return 0
+
+        if not na_validation_result:
+            print("Не все значения предикторов были заполнены!")
+            return 0
+        else:
             # Обработка результатов числовых предикторов
-            self.predictors_values["L"] = int(self.predictors_values["L"])
-            self.predictors_values["B"] = int(self.predictors_values["B"])
-            self.predictors_values["d"] = int(self.predictors_values["d"])
-            self.predictors_values["DW"] = int(self.predictors_values["DW"])
-            self.predictors_values["speed"] = int(self.predictors_values["speed"])
+            self.predictors_values["L"] = float(self.predictors_values["L"])
+            self.predictors_values["B"] = float(self.predictors_values["B"])
+            self.predictors_values["d"] = float(self.predictors_values["d"])
+            self.predictors_values["DW"] = float(self.predictors_values["DW"])
+            self.predictors_values["speed"] = float(self.predictors_values["speed"])
             self.predictors_values["cargo_amount"] = int(self.predictors_values["cargo_amount"])
-            self.predictors_values["cost_per_mile"] = int(self.predictors_values["cost_per_mile"])
+            self.predictors_values["cost_per_mile"] = float(self.predictors_values["cost_per_mile"])
             self.predictors_values["sea_route"] = int(self.predictors_values["sea_route"])
             self.predictors_values["wind_strength"] = int(self.predictors_values["wind_strength"])
             self.predictors_values["sea_state"] = int(self.predictors_values["sea_state"])
@@ -223,8 +244,9 @@ class MainBody(QWidget):
             self.predictors_values["cargo_danger"]
     
             print(self.predictors_values)
-        else:
-            print("Данные нельзя отправлять в нейросеть!")
+
+            return 1
+
         # init_text = self.rightPanelWidget.result_text_label.text()
         # if init_text.endswith("- "):
         #     # Вычисление стоимости транспортировки груза
