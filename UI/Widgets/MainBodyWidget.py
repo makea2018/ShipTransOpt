@@ -216,35 +216,42 @@ class MainBody(QWidget):
     def predict_cost(self):
         na_validation_result = self.validate_na_in_predictors_values()
         invalid_input_validation_result = self.validate_invalid_input()
-        if not invalid_input_validation_result:
-            print("Один или несколько предикторов имеют неверный ввод!")
+        # Добавляем надпись если хотя бы одно значение невалидное (горит красным)
+        if not invalid_input_validation_result and self.rightPanelWidget.verticalLayout.count() < 5:
+            warning = NotValidLabel("Один или несколько предикторов имеют неверный ввод!")
+            self.rightPanelWidget.verticalLayout.addWidget(warning)
             return 0
+        # Удаляем надпись если все значения валидные
+        elif invalid_input_validation_result:
+            if self.rightPanelWidget.verticalLayout.count() == 4:
+                widget = self.rightPanelWidget.verticalLayout.takeAt(3)
+                self.rightPanelWidget.verticalLayout.removeWidget(widget.widget().deleteLater())
+            elif self.rightPanelWidget.verticalLayout.count() == 5:
+                widget = self.rightPanelWidget.verticalLayout.takeAt(4)
+                self.rightPanelWidget.verticalLayout.removeWidget(widget.widget().deleteLater())
 
-        if not na_validation_result:
-            print("Не все значения предикторов были заполнены!")
-            return 0
-        else:
-            # Обработка результатов числовых предикторов
-            self.predictors_values["L"] = float(self.predictors_values["L"])
-            self.predictors_values["B"] = float(self.predictors_values["B"])
-            self.predictors_values["d"] = float(self.predictors_values["d"])
-            self.predictors_values["DW"] = float(self.predictors_values["DW"])
-            self.predictors_values["speed"] = float(self.predictors_values["speed"])
-            self.predictors_values["cargo_amount"] = int(self.predictors_values["cargo_amount"])
-            self.predictors_values["cost_per_mile"] = float(self.predictors_values["cost_per_mile"])
-            self.predictors_values["sea_route"] = int(self.predictors_values["sea_route"])
-            self.predictors_values["wind_strength"] = int(self.predictors_values["wind_strength"])
-            self.predictors_values["sea_state"] = int(self.predictors_values["sea_state"])
+            if na_validation_result:
+                # Обработка результатов числовых предикторов
+                self.predictors_values["L"] = float(self.predictors_values["L"])
+                self.predictors_values["B"] = float(self.predictors_values["B"])
+                self.predictors_values["d"] = float(self.predictors_values["d"])
+                self.predictors_values["DW"] = float(self.predictors_values["DW"])
+                self.predictors_values["speed"] = float(self.predictors_values["speed"])
+                self.predictors_values["cargo_amount"] = int(self.predictors_values["cargo_amount"])
+                self.predictors_values["cost_per_mile"] = float(self.predictors_values["cost_per_mile"])
+                self.predictors_values["sea_route"] = int(self.predictors_values["sea_route"])
+                self.predictors_values["wind_strength"] = int(self.predictors_values["wind_strength"])
+                self.predictors_values["sea_state"] = int(self.predictors_values["sea_state"])
 
-            # Обработка результатов категориальных предикторов
-            self.predictors_values["vessel_type"]
-            self.predictors_values["cargo_demand"]
-            self.predictors_values["cargo_value"]
-            self.predictors_values["cargo_fragility"]
-            self.predictors_values["cargo_danger"]
-    
-            print(self.predictors_values)
-
+                # Обработка результатов категориальных предикторов
+                self.predictors_values["vessel_type"]
+                self.predictors_values["cargo_demand"]
+                self.predictors_values["cargo_value"]
+                self.predictors_values["cargo_fragility"]
+                self.predictors_values["cargo_danger"]
+        
+                print(self.predictors_values)
+            
             return 1
 
         # init_text = self.rightPanelWidget.result_text_label.text()
