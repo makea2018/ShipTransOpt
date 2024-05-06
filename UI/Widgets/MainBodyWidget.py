@@ -243,13 +243,13 @@ class MainBody(QWidget):
 
             if na_validation_result:
                 # Обработка результатов числовых предикторов
-                self.predictors_values["L"] = float(self.predictors_values["L"])
-                self.predictors_values["B"] = float(self.predictors_values["B"])
-                self.predictors_values["d"] = float(self.predictors_values["d"])
-                self.predictors_values["DW"] = float(self.predictors_values["DW"])
-                self.predictors_values["speed"] = float(self.predictors_values["speed"])
+                self.predictors_values["L"] = float(self.predictors_values["L"].replace(",", "."))
+                self.predictors_values["B"] = float(self.predictors_values["B"].replace(",", "."))
+                self.predictors_values["d"] = float(self.predictors_values["d"].replace(",", "."))
+                self.predictors_values["DW"] = float(self.predictors_values["DW"].replace(",", "."))
+                self.predictors_values["speed"] = float(self.predictors_values["speed"].replace(",", "."))
                 self.predictors_values["cargo_amount"] = int(self.predictors_values["cargo_amount"])
-                self.predictors_values["cost_per_mile"] = float(self.predictors_values["cost_per_mile"])
+                self.predictors_values["cost_per_mile"] = float(self.predictors_values["cost_per_mile"].replace(",", "."))
                 self.predictors_values["sea_route"] = int(self.predictors_values["sea_route"])
                 self.predictors_values["wind_strength"] = int(self.predictors_values["wind_strength"])
                 self.predictors_values["sea_state"] = int(self.predictors_values["sea_state"])
