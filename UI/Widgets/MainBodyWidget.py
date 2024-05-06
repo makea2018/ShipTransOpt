@@ -7,6 +7,7 @@ from Widgets.RightPanelWidget import Right_Panel
 import numpy as np
 import json
 import requests
+from time import sleep 
 
 class NotValidLabel(QWidget):
     def __init__(self, text):
@@ -14,7 +15,8 @@ class NotValidLabel(QWidget):
         # =====================================================================#
         #                               Фронт                                  #
         # =====================================================================#
-        NotValidLabel = QLabel(text)
+        self.text = text
+        NotValidLabel = QLabel(self.text)
         # Шрифт
         font = QFont("Arial", 20)
         
@@ -87,6 +89,7 @@ class MainBody(QWidget):
         self.leftPanelWidget.wind_strength.textChanged.connect(self.validate_wind_strength)
         self.leftPanelWidget.sea_state.textChanged.connect(self.validate_sea_state)
         # Предсказание стоимости транспортировки груза (Кнопка 'Определить')
+        self.rightPanelWidget.predict_button.clicked.connect(self.update_cost_QLabel)
         self.rightPanelWidget.predict_button.clicked.connect(self.predict_cost)
 
         # =====================================================================#
@@ -215,12 +218,13 @@ class MainBody(QWidget):
         
         return True
 
-    def predict_cost(self):
+    def update_cost_QLabel(self):
         # Удаляем предсказание о стоимости в строке виджета
         init_text = self.rightPanelWidget.result_text_label.text()
-        if not init_text == "Оптимальная стоимость транспортировки груза - ":
+        if not init_text.endswith("- "):
             self.rightPanelWidget.result_text_label.setText("Оптимальная стоимость транспортировки груза - ")
-        
+
+    def predict_cost(self):    
         na_validation_result = self.validate_na_in_predictors_values()
         invalid_input_validation_result = self.validate_invalid_input()
         # Добавляем надпись если хотя бы одно значение невалидное (горит красным)
@@ -261,6 +265,9 @@ class MainBody(QWidget):
                 # Отправка данных на API для предсказания
                 # JSON
                 data_in_json = json.dumps(self.predictors_values, indent=4)  
+                
+                # Текст QLabel стоимости транспортировки
+                init_text = self.rightPanelWidget.result_text_label.text()
                 
                 # Попытка выполнить запрос в течение 2 сек
                 try:
