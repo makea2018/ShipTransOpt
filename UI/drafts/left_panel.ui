@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>980</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QLineEdit {
+	background-color: rgb(94, 139, 255); 
+	border: 2px solid black; 
+	border-radius: 15px;
+}
+
+QComboBox {
+	background-color: rgb(94, 139, 255); 
+	border: 2px solid black; 
+	border-radius: 15px;
+}
+
+QComboBox::down-arrow {
+    image: none;
+}
+
+QComboBox::drop-down {
+	border-width: 0px;
+}</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <item>
+      <widget class="QLineEdit" name="vessel_title">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Название судна</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="vessel_type">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="currentText">
+        <string>Тип судна</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Тип судна</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>сухогруз</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>танкер</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="L">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Длина судна, м</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="B">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Ширина судна, м</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="d">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Осадка судна, м</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="DW">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Дедвейт, т</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="speed">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Скорость судна, узел</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="cargo_amount">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Количество перевозимого груза, т</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="cost_per_mile">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Цена 1т груза за 1 милю</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cargo_demand">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="currentText">
+        <string>Спрос на товар</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Спрос на товар</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>маленький</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>большой</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cargo_value">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="currentText">
+        <string>Ценность груза</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Ценность груза</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>обычный</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>ценный</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>очень ценный</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cargo_fragility">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="currentText">
+        <string>Хрупкость груза</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Хрупкость груза</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>не хрупкий</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>хрупкий</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cargo_danger">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="currentText">
+        <string>Класс опасности груза</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Класс опасности груза</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>не опасный</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>опасный</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="sea_route">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Протяженность морского пути, миль</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="wind_strength">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Сила ветра, балл</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="sea_state">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Сила волнения, балл</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
